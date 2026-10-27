@@ -189,7 +189,7 @@ pytest-asyncio==0.23.8`,
   },
   '.env.example': {
     desc: 'Environment template excluding secrets',
-    code: `# Gemini API Key (obtain from Google AI Studio: https://aistudio.google.com/)
+    code: `# Gemini Enterprise / Google Cloud API Key
 GEMINI_API_KEY="your-gemini-api-key-here"
 
 # Model Selection (Swappable; default: gemini-2.5-flash)

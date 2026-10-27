@@ -117,6 +117,22 @@ The benchmark runs every attack in two modes:
 
 ---
 
+## 🏛️ Production Enterprise Architecture & Recommended Technology Stack
+
+PortGuard AI is architected as an **enterprise-grade, vendor-agnostic microservice** designed for mission-critical port operations and dry port supply chains. The core components map to modern enterprise standards:
+
+| Architecture Layer | Recommended Enterprise Stack | Alternative / On-Premise Options | Enterprise Rationale |
+|:---|:---|:---|:---|
+| **Foundation Model Layer** | **Google Cloud Vertex AI** (Gemini 2.5 Flash Enterprise) | **Azure OpenAI Service** (GPT-4o) / **AWS Bedrock** (Claude 3.5 Sonnet) / **vLLM / Ollama** (Llama-3-70B-Instruct) | Sub-second latency, deterministic JSON structured output mode, high enterprise SLA. Model-agnostic gateway design supports LiteLLM routing for multi-cloud or air-gapped on-premise dry port deployments. |
+| **API & Gateway Microservice** | **Python 3.11 + FastAPI / AsyncIO** | **Go (Golang) / Rust Microservice** | High-concurrency asynchronous document ingestion, strict static typing, native integration with modern enterprise microservices. |
+| **Data Contracts & Typing** | **Pydantic v2 (Rust-backed core)** | **JSON Schema Draft 2020-12** / **Protocol Buffers** | Zero-hallucination guarantee using `extra="forbid"`, preventing untrusted or malformed fields from reaching downstream Terminal Operating Systems (TOS). |
+| **Security & Guardrail Engine** | **PortGuard Zero-Trust Defense Pipeline** | **NVIDIA NeMo Guardrails** / **Llama Guard 3** | Defense-in-depth: Regex Unicode evasion stripping, West African + European PII scrubbing, XML boundary isolation, deterministic policy risk scoring. |
+| **Distributed Caching & Rate Limiting** | **Redis Enterprise / Sliding-Window Token Bucket** | **Dragonfly / Memcached** | Eliminates duplicate inference costs on recurring manifests; protects backend systems from Denial of Service bursts. |
+| **Auditability & Observability** | **Append-Only JSONL Audit Ledger** | **OpenTelemetry + Datadog / Splunk / Cloud Logging** | Complete forensic chain of custody with SHA-256 cryptographic digests, timestamps, and policy intervention logs. |
+| **Containerization & Orchestration** | **Docker + Kubernetes (GKE / EKS / K3s)** | **Red Hat OpenShift / Nomad** | Zero-downtime rolling updates, isolated worker sandboxes, and edge deployment on ruggedized port terminal servers. |
+
+---
+
 ## 🛠️ Technical Deep Dive (For Technical Reviewers)
 
 ### Layer 1: Input Sanitizer (`src/sanitizer.py`)
@@ -162,7 +178,7 @@ The benchmark runs every attack in two modes:
 
 ### 1. Prerequisites
 * Python 3.11+
-* Free Google AI Studio Gemini API Key ([https://aistudio.google.com/](https://aistudio.google.com/))
+* Gemini Enterprise API Key or Google Cloud Vertex AI credentials (also model-agnostic: swappable with LiteLLM, vLLM, or Ollama for on-premise air-gapped terminal gates)
 
 ### 2. Setup & Installation
 ```bash
