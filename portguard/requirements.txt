@@ -1,0 +1,11 @@
+# Core LLM SDK & Schema Validation
+google-genai==1.5.0
+pydantic==2.8.2
+
+# Application & UI
+streamlit==1.37.0
+python-dotenv==1.0.1
+
+# Testing & Quality
+pytest==8.3.2
+pytest-asyncio==0.23.8

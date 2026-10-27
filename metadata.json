@@ -1,0 +1,6 @@
+{
+  "name": "PortGuard AI",
+  "description": "Secure LLM Gateway & Guardrail Copilot for Maritime Logistics and Shipping Documents (Abidjan / West Africa)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
